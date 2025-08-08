@@ -36,7 +36,8 @@ import shopee from "./social_shopee_img.svg";
 import tiktok from "./social_tiktok_img.svg";
 import zalo from "./zalo-buy-qrcode.webp";
 import product from "./product1.webp";
-
+import menu_collection_1 from "./menu-collection-img-1.webp";
+import menu_icon_1 from "./menu-icon-1.webp";
 export const assets = {
     FlashSale,
     banner_1,
@@ -76,4 +77,6 @@ export const assets = {
     tiktok,
     zalo,
     product,
+    menu_collection_1,
+    menu_icon_1,
 };

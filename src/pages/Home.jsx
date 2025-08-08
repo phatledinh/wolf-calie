@@ -149,7 +149,7 @@ const Home = () => {
                         <SessionProduct
                             image={""}
                             grid_total={10}
-                            grid_banner={4}
+                            grid_item={5}
                         />
                         <Button />
                     </div>
