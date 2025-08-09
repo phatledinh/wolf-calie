@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import CategoryModel from "./CategoryModel";
+import Button from "./Button";
+import SearchModel from "./SearchModel";
 import {
     Search,
     AlignJustify,
@@ -9,11 +13,9 @@ import {
     X,
 } from "lucide-react";
 import logo from "../assets/image/logo-light.webp";
-import { Link } from "react-router-dom";
-import CategoryModel from "./CategoryModel";
-import Button from "./Button";
-import SearchModel from "./SearchModel";
 const Header = () => {
+    const isHomeRoute = useLocation().pathname === "/";
+
     const [isOpen, setIsOpen] = useState(true);
     const [isOpenSearch, setIsOpenSearch] = useState(true);
     useEffect(() => {
@@ -24,14 +26,18 @@ const Header = () => {
         }
     }, [isOpen, isOpenSearch]);
     return (
-        <div className="absolute top-0 left-0 z-50 w-full flex items-center justify-between px-6 py-5 md:px-16 lg:px-36">
+        <div
+            className={`w-full flex items-center justify-between px-6 py-5 md:px-16 lg:px-36 ${
+                isHomeRoute ? "absolute top-0 left-0 z-50 " : ""
+            }`}
+        >
             <div className="flex items-center justify-between space-x-4">
                 <Search
                     className="relative cursor-pointer w-[34px] h-[34px]"
                     onClick={() => setIsOpenSearch(!isOpenSearch)}
                 />
                 <div
-                    className={`absolute top-[15px] w-full max-h-[570px] px-6 left-1/2 -translate-x-1/2 ${
+                    className={`absolute top-[15px] z-100 w-full max-h-[570px] px-6 left-1/2 -translate-x-1/2 ${
                         isOpenSearch ? " hidden" : "block"
                     }`}
                 >
@@ -44,15 +50,13 @@ const Header = () => {
                         Đóng
                     </button>
                 </div>
-                {isOpenSearch && (
-                    <AlignJustify
-                        className="relative cursor-pointer w-[34px] h-[34px]"
-                        onClick={() => setIsOpen(!isOpen)}
-                    />
-                )}
+                <AlignJustify
+                    className="relative cursor-pointer w-[34px] h-[34px]"
+                    onClick={() => setIsOpen(!isOpen)}
+                />
 
                 <div
-                    className={`absolute top-[15px] w-full max-h-[570px] px-6 left-1/2 -translate-x-1/2 ${
+                    className={`absolute top-[15px] z-100 w-full max-h-[570px] px-6 left-1/2 -translate-x-1/2 ${
                         isOpen ? " hidden" : "block"
                     }`}
                 >
@@ -68,26 +72,24 @@ const Header = () => {
                 <Store className="w-[34px] h-[34px]" />
             </div>
             <div className="max-md:flex-1">
-                <img src={logo} alt="Wolf Calie" className="w-40 h-full" />
+                <Link to="/">
+                    <img src={logo} alt="Wolf Calie" className="w-40 h-full" />
+                </Link>
             </div>
             <div className="flex items-center justify-between space-x-4">
                 <User className="w-[34px] h-[34px]" />
-                {isOpenSearch && isOpen && (
-                    <>
-                        <div className="relative cursor-pointer">
-                            <Heart className="w-[34px] h-[34px]" />
-                            <span className="absolute bottom-5 left-5 bg-green-500 text-white text-xs rounded-full px-2 py-1">
-                                0
-                            </span>
-                        </div>
-                        <div className="relative cursor-pointer">
-                            <ShoppingCart className="w-[34px] h-[34px]" />
-                            <span className="absolute bottom-5 left-5 bg-red-500 text-white text-xs rounded-full px-2 py-1">
-                                0
-                            </span>
-                        </div>
-                    </>
-                )}
+                <div className="relative cursor-pointer">
+                    <Heart className="w-[34px] h-[34px]" />
+                    <span className="absolute bottom-5 left-5 bg-green-500 text-white text-xs rounded-full px-2 py-1">
+                        0
+                    </span>
+                </div>
+                <div className="relative cursor-pointer">
+                    <ShoppingCart className="w-[34px] h-[34px]" />
+                    <span className="absolute bottom-5 left-5 bg-red-500 text-white text-xs rounded-full px-2 py-1">
+                        0
+                    </span>
+                </div>
             </div>
         </div>
     );

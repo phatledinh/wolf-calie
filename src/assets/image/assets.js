@@ -38,6 +38,10 @@ import zalo from "./zalo-buy-qrcode.webp";
 import product from "./product1.webp";
 import menu_collection_1 from "./menu-collection-img-1.webp";
 import menu_icon_1 from "./menu-icon-1.webp";
+import commit_1 from "./commit_img_1.svg";
+import commit_2 from "./commit_img_2.svg";
+import commit_3 from "./commit_img_3.svg";
+import commit_4 from "./commit_img_4.svg";
 export const assets = {
     FlashSale,
     banner_1,
@@ -79,4 +83,8 @@ export const assets = {
     product,
     menu_collection_1,
     menu_icon_1,
+    commit_1,
+    commit_2,
+    commit_3,
+    commit_4,
 };

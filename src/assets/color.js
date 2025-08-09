@@ -1,0 +1,18 @@
+export const colors = {
+    Trắng: "#ffffff",
+    "Than chì": "#2F4F4F",
+    Đen: "#000000",
+    Cam: "#FF9800",
+    Xám: "#9E9E9E",
+    Đỏ: "#F44336",
+    Oliu: "#6B8E23",
+    Xanh: "#2196F3",
+    Nâu: "#8B4513",
+    "Hồng phấn": "#FFC0CB",
+    "Tím than": "#FFFFFF",
+    "Xanh da trời": "#87CEEB",
+    Navy: "#000080",
+    Ghi: "#B0BEC5",
+    Tím: "#800080",
+    Hồng: "#E91E63",
+};

@@ -1,14 +1,17 @@
 import img_product from "../assets/image/product1.webp";
 import { Heart, Eye, LayoutGrid } from "lucide-react";
+import { Link } from "react-router-dom";
 const CardProduct = () => {
     return (
         <div className="py-4 ps-2 group">
             <div className="relative ">
-                <img
-                    src={img_product}
-                    alt=""
-                    className="w-full max-w-[460px] h-auto rounded-2xl"
-                />
+                <Link to="/detail-product">
+                    <img
+                        src={img_product}
+                        alt=""
+                        className="w-full max-w-[460px] h-auto rounded-2xl"
+                    />
+                </Link>
                 <div className="flex flex-col justify-start items-center absolute top-2 right-2 gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="bg-white rounded-full p-2 shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <Heart />
