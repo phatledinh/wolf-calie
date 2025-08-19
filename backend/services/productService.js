@@ -33,7 +33,9 @@ const getKidProductService = async () => {
 
         const products = await Product.find({
             categoryId: { $in: categoryIds },
-        }).limit(6);
+        })
+            .limit(6)
+            .populate("variants.colorId", "name hex");
 
         return products;
     } catch (error) {
@@ -47,21 +49,27 @@ const getCollectionService = async () => {
 
     const poloProducts = await Product.find({
         categoryId: { $in: poloCategoryId },
-    }).limit(4);
+    })
+        .limit(4)
+        .populate("variants.colorId", "name hex");
 
     const peacefulCategories = await Category.find({ name: "Áo sơ mi" });
     const peacefulCategoryId = [...peacefulCategories.map((cat) => cat._id)];
 
     const peacefulProducts = await Product.find({
         categoryId: { $in: peacefulCategoryId },
-    }).limit(4);
+    })
+        .limit(4)
+        .populate("variants.colorId", "name hex");
 
     const sportCategories = await Category.find({ name: "Bộ thể thao" });
     const sportCategoryId = [...sportCategories.map((cat) => cat._id)];
 
     const sportProducts = await Product.find({
         categoryId: { $in: sportCategoryId },
-    }).limit(4);
+    })
+        .limit(4)
+        .populate("variants.colorId", "name hex");
 
     return { poloProducts, peacefulProducts, sportProducts };
 };
