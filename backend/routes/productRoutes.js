@@ -1,7 +1,11 @@
 const express = require("express");
 const Product = require("../models/Product");
 const router = express.Router();
-const { getProductByCategory } = require("../controllers/productController");
+const {
+    getProductByCategory,
+    getProductBySlug,
+    getRelatedProduct,
+} = require("../controllers/productController");
 
 router.post("/", async (req, res) => {
     try {
@@ -40,5 +44,7 @@ router.post("/", async (req, res) => {
 });
 
 router.get("/category/:slug", getProductByCategory);
+router.get("/:slug", getProductBySlug);
+router.get("/related-product/:id", getRelatedProduct);
 
 module.exports = router;

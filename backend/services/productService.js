@@ -15,6 +15,30 @@ const getProductByCategoryService = async (slug) => {
         return null;
     }
 };
+const getProductBySlugService = async (slug) => {
+    try {
+        const product = await Product.findOne({ slug }).populate(
+            "variants.colorId",
+            "name hex"
+        );
+        return product;
+    } catch (error) {
+        console.log(">>>>>>>>>>> error: ", error);
+        return null;
+    }
+};
+
+const getRelatedProductService = async (id) => {
+    try {
+        const products = await Product.find({ categoryId: id })
+            .limit(7)
+            .populate("variants.colorId", "name hex");
+        return products;
+    } catch (error) {
+        console.log(">>>>>>>>>>> error ", error);
+        return null;
+    }
+};
 const getKidProductService = async () => {
     try {
         const parentCategory = await Category.findOne({ name: "Trẻ em" });
@@ -75,6 +99,8 @@ const getCollectionService = async () => {
 };
 module.exports = {
     getProductByCategoryService,
+    getProductBySlugService,
     getKidProductService,
     getCollectionService,
+    getRelatedProductService,
 };
