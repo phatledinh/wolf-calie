@@ -1,4 +1,4 @@
-package vn.hoidanit.springrestwithai.exception;
+package com.phatle.wolf_calie.exception;
 
 import java.io.Serial;
 

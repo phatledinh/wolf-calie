@@ -1,7 +1,7 @@
 Start of a new coding session. Read context before doing anything.
 
 ## Read These (always)
-- Read `CLAUDE.md` → project overview and file references
+- Read `GEMINI.md` → project overview and file references
 - Read `docs/PROJECT-STATUS.md` → current progress, warnings, next tasks
 
 ## Read These (only when needed)

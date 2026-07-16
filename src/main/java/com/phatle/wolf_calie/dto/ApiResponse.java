@@ -1,4 +1,4 @@
-package vn.hoidanit.springrestwithai.dto;
+package com.phatle.wolf_calie.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

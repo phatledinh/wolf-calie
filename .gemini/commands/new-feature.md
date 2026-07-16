@@ -1,7 +1,7 @@
 Create a new feature module. Follow these steps in exact order.
 
 ## Step 1: Understand Context
-- Read `CLAUDE.md` → follow links to PROJECT-RULES.md
+- Read `GEMINI.md` → follow links to PROJECT-RULES.md
 - Read `docs/ARCHITECTURE.md` → understand where this feature fits
 - Read `docs/DATABASE.md` → check if entity/table already exists
 - Read `docs/API_SPEC.md` → check if endpoints are already defined
