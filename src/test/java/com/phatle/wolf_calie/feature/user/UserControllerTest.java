@@ -38,6 +38,7 @@ class UserControllerTest {
 
     @Test
     @DisplayName("Should create user and return 201 Created")
+    @WithMockUser(roles = "ADMIN")
     void createUser_validRequest_returnsCreated() throws Exception {
         CreateUserRequest request = new CreateUserRequest("Integration Test", "integration@test.com", "password123", "0123456789");
 
@@ -52,6 +53,7 @@ class UserControllerTest {
 
     @Test
     @DisplayName("Should return 400 when request is invalid")
+    @WithMockUser(roles = "ADMIN")
     void createUser_invalidRequest_returnsBadRequest() throws Exception {
         CreateUserRequest request = new CreateUserRequest("", "invalid-email", "short", null);
 
@@ -64,6 +66,7 @@ class UserControllerTest {
 
     @Test
     @DisplayName("Should return 409 when email already exists")
+    @WithMockUser(roles = "ADMIN")
     void createUser_duplicateEmail_returnsConflict() throws Exception {
         User existingUser = new User();
         existingUser.setName("Existing");

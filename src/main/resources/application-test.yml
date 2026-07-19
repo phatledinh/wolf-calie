@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: ${TEST_DB_URL:jdbc:mysql://localhost:3306/wolf_calie_test}
+    url: ${TEST_DB_URL:jdbc:mysql://localhost:3306/wolfcalie_test?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false}
     username: ${TEST_DB_USERNAME:root}
-    password: ${TEST_DB_PASSWORD:}
+    password: ${TEST_DB_PASSWORD:123456}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:

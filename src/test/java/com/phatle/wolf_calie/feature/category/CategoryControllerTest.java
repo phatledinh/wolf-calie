@@ -65,7 +65,7 @@ class CategoryControllerTest {
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.statusCode").value(400))
-                .andExpect(jsonPath("$.data.name").exists());
+                .andExpect(jsonPath("$.details").exists());
     }
 
     @Test
