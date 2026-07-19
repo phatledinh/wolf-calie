@@ -44,7 +44,7 @@ Last updated: 2026-07-19 | By: @ledinhphat
 ### Phase 1 — Master Data
 - [x] Permission
 - [x] Category
-- [ ] Brand
+- [x] Brand
 - [ ] Color
 - [ ] Size
 - [ ] Tag

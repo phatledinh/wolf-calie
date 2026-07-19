@@ -108,6 +108,7 @@
 | logo_url | VARCHAR(255) | NULLABLE | |
 | is_active | BOOLEAN | NOT NULL, DEFAULT true | |
 | created_at | TIMESTAMP | NOT NULL, DEFAULT CURRENT_TIMESTAMP | |
+| updated_at | TIMESTAMP | NULLABLE, ON UPDATE CURRENT_TIMESTAMP | |
 | deleted_at | TIMESTAMP | NULLABLE | |
 
 ### colors
