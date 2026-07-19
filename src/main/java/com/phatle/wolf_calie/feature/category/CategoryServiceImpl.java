@@ -65,7 +65,9 @@ public class CategoryServiceImpl implements CategoryService {
         category.setDescription(request.description());
         category.setImageUrl(request.imageUrl());
         category.setSortOrder(request.sortOrder());
-        category.setActive(request.isActive());
+        if (request.isActive() != null) {
+            category.setActive(request.isActive());
+        }
 
         if (request.parentId() != null) {
             if (request.parentId().equals(id)) {

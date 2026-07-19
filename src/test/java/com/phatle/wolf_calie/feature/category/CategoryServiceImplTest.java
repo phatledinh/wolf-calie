@@ -169,6 +169,7 @@ class CategoryServiceImplTest {
         
         Category existing = new Category();
         existing.setId(1L);
+        existing.setName("Old Name");
         
         when(categoryRepository.findById(1L)).thenReturn(Optional.of(existing));
 
