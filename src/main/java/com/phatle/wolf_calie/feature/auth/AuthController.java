@@ -5,7 +5,7 @@ import com.phatle.wolf_calie.feature.auth.dto.LoginResponse;
 import com.phatle.wolf_calie.security.JwtService;
 import jakarta.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Value;
+import com.phatle.wolf_calie.config.JwtProperties;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,15 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-    @Value("${jwt.expiration}")
-    private long jwtExpiration;
-
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
+    private final JwtProperties jwtProperties;
 
-    public AuthController(AuthenticationManager authenticationManager, JwtService jwtService) {
+    public AuthController(AuthenticationManager authenticationManager, JwtService jwtService, JwtProperties jwtProperties) {
         this.authenticationManager = authenticationManager;
         this.jwtService = jwtService;
+        this.jwtProperties = jwtProperties;
     }
 
     @PostMapping("/login")
@@ -38,6 +37,6 @@ public class AuthController {
 
         // Sinh token từ thông tin Authentication
         String accessToken = jwtService.generateToken(authentication);
-        return ResponseEntity.ok(new LoginResponse(accessToken, "Bearer", jwtExpiration));
+        return ResponseEntity.ok(new LoginResponse(accessToken, "Bearer", jwtProperties.accessTokenExpiration()));
     }
 }
