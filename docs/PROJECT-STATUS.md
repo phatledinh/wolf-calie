@@ -11,12 +11,12 @@ Last updated: 2026-07-19 | By: @ledinhphat
 ✅ Authorization Workflow
 ✅ AI Development Workflow
 ✅ Backend folder structure
-✅ Phase 0: Project Skeleton, GlobalExceptionHandler, ApiResponse, SecurityConfig, JwtConfig
+✅ Phase 0: Project Skeleton, GlobalExceptionHandler, ApiResponse, SecurityConfig, JwtConfig, OpenAPI / Swagger Config
 ✅ Phase 1: Permission CRUD, Category CRUD
 ✅ Phase 2: User, Unit Test, Integration Test
 
 ## In Progress
-- Phase 0: Validation, MapStruct, OpenAPI / Swagger Config, Base Entity
+- Phase 0: Validation, MapStruct, Base Entity
 - Phase 2: Role, UserAddress
 
 ## Next Tasks
@@ -35,7 +35,7 @@ Last updated: 2026-07-19 | By: @ledinhphat
 - [x] JwtConfig
 - [ ] Validation Config
 - [ ] MapStruct Config
-- [ ] OpenAPI / Swagger Config
+- [x] OpenAPI / Swagger Config
 - [x] Base Entity (Audit Fields)
 - [x] Unit Test
 - [x] Integration Test

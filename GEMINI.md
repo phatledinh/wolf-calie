@@ -1,6 +1,6 @@
-# Project: HOIDANIT-SPRING-REST-WITH-AI
+# Project: LEDINHPHAT-WOLFCALIE
 
-HR Management System — RESTful API built with Spring Boot 4, Spring Security 7,
+Ecommerce Fashion System — RESTful API built with Spring Boot 4, Spring Security 7,
 JWT authentication via oauth2-resource-server.
 
 ## Read Before Coding
