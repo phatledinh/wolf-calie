@@ -45,7 +45,7 @@ Last updated: 2026-07-19 | By: @ledinhphat
 - [x] Permission
 - [x] Category
 - [x] Brand
-- [ ] Color
+- [x] Color
 - [ ] Size
 - [ ] Tag
 - [ ] Collection
