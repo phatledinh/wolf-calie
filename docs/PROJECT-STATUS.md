@@ -12,7 +12,7 @@ Last updated: 2026-07-19 | By: @ledinhphat
 ✅ AI Development Workflow
 ✅ Backend folder structure
 ✅ Phase 0: Project Skeleton, GlobalExceptionHandler, ApiResponse, SecurityConfig, JwtConfig
-✅ Phase 1: Permission CRUD
+✅ Phase 1: Permission CRUD, Category CRUD
 ✅ Phase 2: User, Unit Test, Integration Test
 
 ## In Progress
@@ -22,7 +22,7 @@ Last updated: 2026-07-19 | By: @ledinhphat
 ## Next Tasks
 - [P1] Implement Role CRUD
 - [P2] Implement Auth Module (Login/Register/Refresh Token)
-- [P3] Khởi tạo Category & Product modules
+- [P3] Khởi tạo Product module
 
 ## Milestones
 
@@ -43,7 +43,7 @@ Last updated: 2026-07-19 | By: @ledinhphat
 
 ### Phase 1 — Master Data
 - [x] Permission
-- [ ] Category
+- [x] Category
 - [ ] Brand
 - [ ] Color
 - [ ] Size
