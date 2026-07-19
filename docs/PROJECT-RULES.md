@@ -904,3 +904,46 @@ feature/{name}/
 | Architecture decision | Create new file in `docs/decisions/` |
 | New API endpoints | Update `docs/API_SPEC.md` |
 | Schema changes | Update `docs/DATABASE.md` |
+
+## 23. PROJECT-STATUS.md Rules
+
+### Purpose
+
+PROJECT-STATUS.md is the project's master roadmap and backlog.
+It is NOT a progress report.
+
+PROJECT-STATUS.md is the single source of truth for project planning.
+
+Milestones represent the complete project roadmap.
+
+Every unfinished task must remain visible until completed.
+
+History should be appended, never replaced.
+### Update Rules
+
+- NEVER rewrite the file structure.
+- NEVER replace the roadmap with percentage progress.
+- NEVER summarize milestones.
+- NEVER delete unfinished tasks.
+- NEVER reorder phases unless requested.
+- Only update task status.
+
+Allowed changes:
+
+- Move task:
+  Next Tasks -> In Progress -> Completed
+
+- Tick milestone checkboxes:
+  ⬜ -> ✅
+
+- Append a new Session History entry.
+
+Forbidden changes:
+
+- Removing phases.
+- Removing unfinished tasks.
+- Converting milestones into tables.
+- Replacing roadmap with dashboard or percentage report.
+- Changing the file format without explicit user request.
+
+If unsure, preserve the existing content exactly.
