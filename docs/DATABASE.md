@@ -359,7 +359,7 @@ All Master Data entities MUST inherit from a common `BaseEntity`:
 ## 6. System Tables & Indexing Strategies
 
 ### Roles & Permissions (RBAC)
-**roles**: `id`, `name`, `description`
+**roles**: `id`, `name`, `description`, `is_active`, `created_at`, `updated_at`
 **permissions**: `id`, `name`, `api_path`, `method`, `module`
 **user_role**: `user_id`, `role_id`
 **permission_role**: `permission_id`, `role_id`

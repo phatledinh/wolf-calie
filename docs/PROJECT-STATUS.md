@@ -17,10 +17,9 @@ Last updated: 2026-07-20 | By: @ledinhphat (updated by AI)
 
 ## In Progress
 - Phase 0: Validation, MapStruct, Base Entity
-- Phase 2: Role, UserAddress
+- Phase 2: UserAddress
 
 ## Next Tasks
-- [P2] Implement Role CRUD
 - [P3] Implement Auth Module (Login/Register/Refresh Token)
 
 ## Milestones
@@ -53,7 +52,7 @@ Last updated: 2026-07-20 | By: @ledinhphat (updated by AI)
 
 
 ### Phase 2 — Identity & Access
-- [ ] Role
+- [x] Role
 - [x] User
 - [ ] UserAddress
 - [x] Unit Test
@@ -155,3 +154,6 @@ Last updated: 2026-07-20 | By: @ledinhphat (updated by AI)
 - Implemented `Collection` CRUD (Entity, Repository, Service, Controller, DTOs).
 - Wrote Unit and Integration tests for `Collection`.
 - Allowed public GET access to `/api/v1/collections` in `SecurityConfig`.
+- Updated `DATABASE.md` to include `is_active`, `created_at`, `updated_at` for Role.
+- Implemented `Role` CRUD (Entity, Repository, Service, Controller, DTOs) with unidirectional `@ManyToMany` mapping to `Permission`.
+- Wrote and passed comprehensive Unit Tests (`RoleServiceImplTest`) and Integration Tests (`RoleControllerIntegrationTest`) adhering to custom project conventions.
