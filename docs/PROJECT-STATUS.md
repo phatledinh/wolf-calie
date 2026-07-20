@@ -12,7 +12,7 @@ Last updated: 2026-07-20 | By: @ledinhphat (updated by AI)
 ✅ AI Development Workflow
 ✅ Backend folder structure
 ✅ Phase 0: Project Skeleton, GlobalExceptionHandler, ApiResponse, SecurityConfig, JwtConfig, OpenAPI / Swagger Config
-✅ Phase 1: Permission CRUD, Category CRUD, Brand CRUD, Color CRUD, Size CRUD
+✅ Phase 1: Permission CRUD, Category CRUD, Brand CRUD, Color CRUD, Size CRUD, Tag CRUD
 ✅ Phase 2: User, Unit Test, Integration Test
 
 ## In Progress
@@ -47,7 +47,7 @@ Last updated: 2026-07-20 | By: @ledinhphat (updated by AI)
 - [x] Brand
 - [x] Color
 - [x] Size
-- [ ] Tag
+- [x] Tag
 - [ ] Collection
 - [ ] Unit Test
 - [ ] Integration Test
@@ -149,3 +149,7 @@ Last updated: 2026-07-20 | By: @ledinhphat (updated by AI)
 - Wrote comprehensive Unit and Integration tests for `Size` (all 13 passed).
 - Updated `SecurityConfig` to allow public GET access to `/api/v1/sizes`.
 - Added `CONTEXT.md` for `Size` module.
+- Implemented `BaseEntity` as a unified audit model for all Master Data entities.
+- Implemented `Tag` CRUD (Entity, Repository, Service, Controller, DTOs).
+- Wrote comprehensive Unit and Integration tests for `Tag`.
+- Added `CONTEXT.md` for `Tag` module.

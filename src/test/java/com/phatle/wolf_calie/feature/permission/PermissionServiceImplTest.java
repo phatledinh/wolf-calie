@@ -4,7 +4,6 @@ import com.phatle.wolf_calie.exception.InvalidRequestException;
 import com.phatle.wolf_calie.exception.ResourceNotFoundException;
 import com.phatle.wolf_calie.feature.permission.dto.CreatePermissionRequest;
 import com.phatle.wolf_calie.feature.permission.dto.PermissionResponse;
-import com.phatle.wolf_calie.feature.permission.dto.UpdatePermissionRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,7 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -53,7 +51,7 @@ class PermissionServiceImplTest {
         CreatePermissionRequest request = new CreatePermissionRequest("View Users", "/api/v1/users", "GET", "User");
         when(permissionRepository.existsByName("View Users")).thenReturn(false);
         when(permissionRepository.existsByApiPathAndMethod("/api/v1/users", "GET")).thenReturn(false);
-        
+
         Permission savedPermission = new Permission();
         savedPermission.setId(1L);
         savedPermission.setName("View Users");
