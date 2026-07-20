@@ -43,6 +43,33 @@
 
 ---
 
+## 0. Base Conventions (Audit & Soft Delete)
+
+### BaseEntity
+All Master Data entities MUST inherit from a common `BaseEntity`:
+- `id` (Primary Key)
+- `created_at` (Audit)
+- `updated_at` (Audit)
+- `deleted_at` (Soft Delete - depending on entity)
+*(Optionally `created_by` and `updated_by` can be added).*
+
+### Soft Delete Strategy
+
+**Master Data:**
+- ✅ Category, Brand, Color, Size, Tag, Collection (to preserve order history)
+
+**Business Data:**
+- ✅ Product, User, UserAddress
+- ❌ ProductVariant, ProductImage, Wishlist
+
+**Transaction Data (Audit log - NEVER DELETE):**
+- ❌ Order, OrderItem, Payment, InventoryTransaction
+
+**System Data:**
+- ❌ Permission, Role (Use `isActive` instead)
+
+---
+
 ## 1. User & Account Domain
 
 ### users
@@ -76,6 +103,7 @@
 | ward_id | VARCHAR(50) | NOT NULL | API ID |
 | street | VARCHAR(255) | NOT NULL | Detailed address |
 | is_default | BOOLEAN | NOT NULL, DEFAULT false | |
+| deleted_at | TIMESTAMP | NULLABLE | Soft delete timestamp |
 
 ---
 
@@ -93,7 +121,7 @@
 | sort_order | INT | NOT NULL, DEFAULT 0 | Display priority |
 | is_active | BOOLEAN | NOT NULL, DEFAULT true | |
 | created_at | TIMESTAMP | NOT NULL, DEFAULT CURRENT_TIMESTAMP | |
-| updated_at | TIMESTAMP | NULLABLE | |
+| updated_at | TIMESTAMP | NULLABLE, ON UPDATE CURRENT_TIMESTAMP | |
 | deleted_at | TIMESTAMP | NULLABLE | |
 
 ### brands
@@ -118,6 +146,9 @@
 | name | VARCHAR(100) | NOT NULL | e.g. Black, Navy Blue |
 | hex_code | VARCHAR(10) | NOT NULL | e.g. #000000 |
 | sort_order | INT | NOT NULL, DEFAULT 0 | |
+| created_at | TIMESTAMP | NOT NULL, DEFAULT CURRENT_TIMESTAMP | |
+| updated_at | TIMESTAMP | NULLABLE, ON UPDATE CURRENT_TIMESTAMP | |
+| deleted_at | TIMESTAMP | NULLABLE | |
 
 ### sizes
 | Column | Type | Constraints | Description |
@@ -125,6 +156,9 @@
 | id | BIGINT | PK, AUTO_INCREMENT | |
 | name | VARCHAR(50) | NOT NULL | e.g. XS, S, M, L, XL |
 | sort_order | INT | NOT NULL, DEFAULT 0 | |
+| created_at | TIMESTAMP | NOT NULL, DEFAULT CURRENT_TIMESTAMP | |
+| updated_at | TIMESTAMP | NULLABLE, ON UPDATE CURRENT_TIMESTAMP | |
+| deleted_at | TIMESTAMP | NULLABLE | |
 
 ### products
 | Column | Type | Constraints | Description |
@@ -156,7 +190,6 @@
 | stock | INT | NOT NULL, DEFAULT 0 | Available inventory |
 | sku | VARCHAR(100) | NOT NULL, UNIQUE | Barcode / SKU |
 | version | INT | NOT NULL, DEFAULT 0 | Optimistic Locking |
-| deleted_at | TIMESTAMP | NULLABLE | |
 
 ### product_images
 | Column | Type | Constraints | Description |
@@ -169,9 +202,9 @@
 | sort_order | INT | NOT NULL, DEFAULT 0 | |
 
 ### collections & tags
-**collections**: `id`, `name`, `slug`, `description`, `image_url`, `is_active`, `start_date`, `end_date`, `created_at`
+**collections**: `id`, `name`, `slug`, `description`, `image_url`, `is_active`, `start_date`, `end_date`, `created_at`, `updated_at`, `deleted_at`
 **collection_products**: `collection_id`, `product_id` (Composite PK)
-**tags**: `id`, `name`, `slug`
+**tags**: `id`, `name`, `slug`, `created_at`, `updated_at`, `deleted_at`
 **product_tags**: `product_id`, `tag_id` (Composite PK)
 
 ---

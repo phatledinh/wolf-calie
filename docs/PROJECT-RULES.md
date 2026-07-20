@@ -947,3 +947,30 @@ Forbidden changes:
 - Changing the file format without explicit user request.
 
 If unsure, preserve the existing content exactly.
+
+---
+
+## 24. Database Consistency
+
+- All Master Data entities must use the same audit field structure.
+- BaseEntity is mandatory for all entities that support auditing.
+- No entity may define a different audit model unless explicitly documented in DATABASE.md.
+
+## 25. API Consistency
+
+- Every top-level resource must have its own REST endpoint.
+- Use plural resource names.
+- Examples:
+  - `/categories`
+  - `/brands`
+  - `/colors`
+  - `/sizes`
+  - `/tags`
+  - `/collections`
+
+- Do not introduce grouping prefixes (e.g. `/attributes/*`) unless explicitly approved in API_SPEC.md.
+
+## 26. Documentation First
+
+If DATABASE.md or API_SPEC.md is inconsistent, stop implementation and request a documentation update.
+Never infer or extend the design.

@@ -129,16 +129,14 @@ If a user double-clicks checkout, the second request with the same key returns t
 - `PUT /products/{id}/images/{imageId}` 🔒 (Admin) (Set as primary)
 - `DELETE /products/{id}/images/{imageId}` 🔒 (Admin)
 
-### Categories, Brands, Collections, Tags
+### Categories, Brands, Collections, Tags, Colors, Sizes
 *All support full CRUD for Admin, GET for Public.*
 - `GET|POST /categories`, `PUT|DELETE /categories/{id}`
 - `GET|POST /brands`, `PUT|DELETE /brands/{id}`
 - `GET|POST /collections`, `PUT|DELETE /collections/{id}`
 - `GET|POST /tags`, `PUT|DELETE /tags/{id}`
-
-### Attributes
-- `GET /attributes/colors` 🔓
-- `GET /attributes/sizes` 🔓
+- `GET|POST /colors`, `PUT|DELETE /colors/{id}`
+- `GET|POST /sizes`, `PUT|DELETE /sizes/{id}`
 
 ---
 

@@ -1,5 +1,5 @@
 # Project Status
-Last updated: 2026-07-19 | By: @ledinhphat
+Last updated: 2026-07-20 | By: @ledinhphat (updated by AI)
 
 > AI: update this file at the end of every session when asked. Follow this exact format. Keep it concise — under 150 lines.
 
@@ -136,3 +136,12 @@ Last updated: 2026-07-19 | By: @ledinhphat
 - [ ] Unit Test
 - [ ] Integration Test
 - [ ] Merge
+
+## Session History
+
+### 2026-07-20
+- Standardized `DATABASE.md`, `API_SPEC.md`, and `PROJECT-RULES.md` for enterprise consistency.
+- Unified the audit model for Master Data entities by adopting a common `BaseEntity` structure.
+- Defined Soft Delete policies for applicable entities and standardized audit fields across the database schema.
+- Refactored API specifications to expose `Color` and `Size` as top-level REST resources (`/colors`, `/sizes`) instead of nested `/attributes/*`.
+- Added project rules requiring all implementations to strictly follow `DATABASE.md` and `API_SPEC.md`, treating them as the single source of truth.
