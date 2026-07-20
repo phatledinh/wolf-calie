@@ -12,7 +12,7 @@ Last updated: 2026-07-20 | By: @ledinhphat (updated by AI)
 ✅ AI Development Workflow
 ✅ Backend folder structure
 ✅ Phase 0: Project Skeleton, GlobalExceptionHandler, ApiResponse, SecurityConfig, JwtConfig, OpenAPI / Swagger Config
-✅ Phase 1: Permission CRUD, Category CRUD
+✅ Phase 1: Permission CRUD, Category CRUD, Brand CRUD, Color CRUD, Size CRUD
 ✅ Phase 2: User, Unit Test, Integration Test
 
 ## In Progress
@@ -20,9 +20,9 @@ Last updated: 2026-07-20 | By: @ledinhphat (updated by AI)
 - Phase 2: Role, UserAddress
 
 ## Next Tasks
-- [P1] Implement Role CRUD
-- [P2] Implement Auth Module (Login/Register/Refresh Token)
-- [P3] Khởi tạo Product module
+- [P1] Implement Tag & Collection CRUD
+- [P2] Implement Role CRUD
+- [P3] Implement Auth Module (Login/Register/Refresh Token)
 
 ## Milestones
 
@@ -46,7 +46,7 @@ Last updated: 2026-07-20 | By: @ledinhphat (updated by AI)
 - [x] Category
 - [x] Brand
 - [x] Color
-- [ ] Size
+- [x] Size
 - [ ] Tag
 - [ ] Collection
 - [ ] Unit Test
@@ -145,3 +145,7 @@ Last updated: 2026-07-20 | By: @ledinhphat (updated by AI)
 - Defined Soft Delete policies for applicable entities and standardized audit fields across the database schema.
 - Refactored API specifications to expose `Color` and `Size` as top-level REST resources (`/colors`, `/sizes`) instead of nested `/attributes/*`.
 - Added project rules requiring all implementations to strictly follow `DATABASE.md` and `API_SPEC.md`, treating them as the single source of truth.
+- Implemented `Size` CRUD (Entity, Repository, Service, Controller, DTOs).
+- Wrote comprehensive Unit and Integration tests for `Size` (all 13 passed).
+- Updated `SecurityConfig` to allow public GET access to `/api/v1/sizes`.
+- Added `CONTEXT.md` for `Size` module.

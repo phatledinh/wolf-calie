@@ -36,7 +36,7 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(WHITELIST).permitAll()
-                        .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/v1/categories/**", "/api/v1/brands/**", "/api/v1/colors/**").permitAll()
+                        .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/v1/categories/**", "/api/v1/brands/**", "/api/v1/colors/**", "/api/v1/sizes/**").permitAll()
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
 
