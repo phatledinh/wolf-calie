@@ -20,7 +20,6 @@ Last updated: 2026-07-20 | By: @ledinhphat (updated by AI)
 - Phase 2: Role, UserAddress
 
 ## Next Tasks
-- [P1] Implement Tag & Collection CRUD
 - [P2] Implement Role CRUD
 - [P3] Implement Auth Module (Login/Register/Refresh Token)
 
@@ -39,7 +38,7 @@ Last updated: 2026-07-20 | By: @ledinhphat (updated by AI)
 - [x] Base Entity (Audit Fields)
 - [x] Unit Test
 - [x] Integration Test
-- [ ] Merge
+
 
 ### Phase 1 — Master Data
 - [x] Permission
@@ -48,10 +47,10 @@ Last updated: 2026-07-20 | By: @ledinhphat (updated by AI)
 - [x] Color
 - [x] Size
 - [x] Tag
-- [ ] Collection
-- [ ] Unit Test
-- [ ] Integration Test
-- [ ] Merge
+- [x] Collection
+- [x] Unit Test
+- [x] Integration Test
+
 
 ### Phase 2 — Identity & Access
 - [ ] Role
@@ -59,7 +58,7 @@ Last updated: 2026-07-20 | By: @ledinhphat (updated by AI)
 - [ ] UserAddress
 - [x] Unit Test
 - [x] Integration Test
-- [ ] Merge
+
 
 ### Phase 3 — Authentication
 - [ ] Login
@@ -69,7 +68,7 @@ Last updated: 2026-07-20 | By: @ledinhphat (updated by AI)
 - [ ] GET /users/me
 - [ ] Unit Test
 - [ ] Integration Test
-- [ ] Merge
+
 
 ### Phase 4 — Catalog
 - [ ] Product
@@ -79,7 +78,7 @@ Last updated: 2026-07-20 | By: @ledinhphat (updated by AI)
 - [ ] ProductTag
 - [ ] Unit Test
 - [ ] Integration Test
-- [ ] Merge
+
 
 ### Phase 5 — Inventory
 - [ ] InventoryService
@@ -88,7 +87,7 @@ Last updated: 2026-07-20 | By: @ledinhphat (updated by AI)
 - [ ] Optimistic Lock
 - [ ] Unit Test
 - [ ] Integration Test
-- [ ] Merge
+
 
 ### Phase 6 — Sales (E-commerce Core)
 - [ ] Cart
@@ -103,7 +102,7 @@ Last updated: 2026-07-20 | By: @ledinhphat (updated by AI)
 - [ ] NotificationListener
 - [ ] Unit Test
 - [ ] Integration Test
-- [ ] Merge
+
 
 ### Phase 7 — Marketing & Customer
 - [ ] Voucher
@@ -112,7 +111,7 @@ Last updated: 2026-07-20 | By: @ledinhphat (updated by AI)
 - [ ] Notification
 - [ ] Unit Test
 - [ ] Integration Test
-- [ ] Merge
+
 
 ### Phase 8 — Infrastructure
 - [ ] Refresh Token Rotation
@@ -122,7 +121,7 @@ Last updated: 2026-07-20 | By: @ledinhphat (updated by AI)
 - [ ] Redis Cache
 - [ ] Unit Test
 - [ ] Integration Test
-- [ ] Merge
+
 
 ### Phase 9 — Security & Optimization
 - [ ] RBAC Middleware
@@ -135,7 +134,7 @@ Last updated: 2026-07-20 | By: @ledinhphat (updated by AI)
 - [ ] Performance Optimization
 - [ ] Unit Test
 - [ ] Integration Test
-- [ ] Merge
+
 
 ## Session History
 
@@ -153,3 +152,6 @@ Last updated: 2026-07-20 | By: @ledinhphat (updated by AI)
 - Implemented `Tag` CRUD (Entity, Repository, Service, Controller, DTOs).
 - Wrote comprehensive Unit and Integration tests for `Tag`.
 - Added `CONTEXT.md` for `Tag` module.
+- Implemented `Collection` CRUD (Entity, Repository, Service, Controller, DTOs).
+- Wrote Unit and Integration tests for `Collection`.
+- Allowed public GET access to `/api/v1/collections` in `SecurityConfig`.
