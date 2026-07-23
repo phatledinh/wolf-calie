@@ -60,6 +60,14 @@ public class User {
     @Column(name = "deleted_at")
     private Instant deletedAt;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private java.util.Set<com.phatle.wolf_calie.feature.role.Role> roles = new java.util.HashSet<>();
+
     public User() {
     }
 
@@ -173,5 +181,13 @@ public class User {
 
     public void setDeletedAt(Instant deletedAt) {
         this.deletedAt = deletedAt;
+    }
+
+    public java.util.Set<com.phatle.wolf_calie.feature.role.Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(java.util.Set<com.phatle.wolf_calie.feature.role.Role> roles) {
+        this.roles = roles;
     }
 }

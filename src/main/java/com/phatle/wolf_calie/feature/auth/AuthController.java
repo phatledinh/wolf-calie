@@ -1,42 +1,149 @@
 package com.phatle.wolf_calie.feature.auth;
 
-import com.phatle.wolf_calie.feature.auth.dto.LoginRequest;
-import com.phatle.wolf_calie.feature.auth.dto.LoginResponse;
-import com.phatle.wolf_calie.security.JwtService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
-import com.phatle.wolf_calie.config.JwtProperties;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/auth")
-public class AuthController {
-    private final AuthenticationManager authenticationManager;
-    private final JwtService jwtService;
-    private final JwtProperties jwtProperties;
+import com.phatle.wolf_calie.dto.ApiResponse;
+import com.phatle.wolf_calie.exception.InvalidTokenException;
+import com.phatle.wolf_calie.feature.auth.dto.LoginRequest;
+import com.phatle.wolf_calie.feature.auth.dto.LoginResponse;
+import com.phatle.wolf_calie.feature.auth.dto.RefreshRequest;
+import com.phatle.wolf_calie.feature.auth.dto.RegisterRequest;
+import com.phatle.wolf_calie.feature.auth.dto.RegisterResponse;
+import com.phatle.wolf_calie.feature.user.dto.UserResponse;
 
-    public AuthController(AuthenticationManager authenticationManager, JwtService jwtService, JwtProperties jwtProperties) {
-        this.authenticationManager = authenticationManager;
-        this.jwtService = jwtService;
-        this.jwtProperties = jwtProperties;
+import java.util.Arrays;
+
+@RestController
+@RequestMapping("/api/v1/auth")
+public class AuthController {
+
+    private static final String REFRESH_TOKEN_COOKIE_NAME = "refresh_token";
+    private static final String COOKIE_PATH = "/api/v1/auth";
+    private static final int COOKIE_MAX_AGE = 259200;
+
+    private final AuthService authService;
+
+    public AuthController(AuthService authService) {
+        this.authService = authService;
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
-        // Trình quản lý xác thực sẽ sử dụng CustomUserDetailsService để xác thực email
-        // & password
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+    public ResponseEntity<ApiResponse<LoginResponse>> login(
+            @Valid @RequestBody LoginRequest request,
+            HttpServletRequest httpRequest,
+            HttpServletResponse httpResponse) {
 
-        // Sinh token từ thông tin Authentication
-        String accessToken = jwtService.generateToken(authentication);
-        return ResponseEntity.ok(new LoginResponse(accessToken, "Bearer", jwtProperties.accessTokenExpiration()));
+        String deviceInfo = httpRequest.getHeader("User-Agent");
+        String ipAddress = extractClientIp(httpRequest);
+
+        LoginResponse loginResponse = authService.login(request, deviceInfo, ipAddress);
+        setRefreshTokenCookie(httpResponse, loginResponse.refreshToken());
+
+        // We use ApiResponse.success(data) because the old constructor took just data
+        return ResponseEntity.ok(ApiResponse.success(loginResponse));
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<ApiResponse<RegisterResponse>> register(
+            @Valid @RequestBody RegisterRequest request) {
+
+        RegisterResponse response = authService.register(request);
+        // We use ApiResponse.created(data)
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(ApiResponse.created(response));
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<ApiResponse<LoginResponse>> refresh(
+            @RequestBody(required = false) RefreshRequest body,
+            HttpServletRequest httpRequest,
+            HttpServletResponse httpResponse) {
+
+        String rawRefreshToken = extractRefreshToken(body, httpRequest);
+        if (rawRefreshToken == null) {
+            throw new InvalidTokenException("Refresh token không được cung cấp");
+        }
+
+        LoginResponse loginResponse = authService.refresh(rawRefreshToken);
+        setRefreshTokenCookie(httpResponse, loginResponse.refreshToken());
+
+        return ResponseEntity.ok(ApiResponse.success(loginResponse));
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<ApiResponse<Void>> logout(
+            HttpServletRequest httpRequest,
+            HttpServletResponse httpResponse) {
+
+        String rawRefreshToken = extractRefreshTokenFromCookie(httpRequest);
+        if (rawRefreshToken != null) {
+            authService.logout(rawRefreshToken);
+        }
+        clearRefreshTokenCookie(httpResponse);
+
+        return ResponseEntity.ok(ApiResponse.success(null));
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<ApiResponse<UserResponse>> getMe(
+            @AuthenticationPrincipal Jwt jwt) {
+
+        String email = jwt.getSubject();
+        UserResponse userResponse = authService.getMe(email);
+        return ResponseEntity.ok(ApiResponse.success(userResponse));
+    }
+
+    private String extractRefreshToken(RefreshRequest body, HttpServletRequest request) {
+        String fromCookie = extractRefreshTokenFromCookie(request);
+        if (fromCookie != null) {
+            return fromCookie;
+        }
+        if (body != null && body.refreshToken() != null && !body.refreshToken().isBlank()) {
+            return body.refreshToken();
+        }
+        return null;
+    }
+
+    private String extractRefreshTokenFromCookie(HttpServletRequest request) {
+        if (request.getCookies() == null) {
+            return null;
+        }
+        return Arrays.stream(request.getCookies())
+                .filter(cookie -> REFRESH_TOKEN_COOKIE_NAME.equals(cookie.getName()))
+                .map(Cookie::getValue)
+                .findFirst()
+                .orElse(null);
+    }
+
+    private void setRefreshTokenCookie(HttpServletResponse response, String rawToken) {
+        response.setHeader("Set-Cookie",
+                REFRESH_TOKEN_COOKIE_NAME + "=" + rawToken
+                        + "; HttpOnly; SameSite=Lax; Path=" + COOKIE_PATH
+                        + "; Max-Age=" + COOKIE_MAX_AGE);
+    }
+
+    private void clearRefreshTokenCookie(HttpServletResponse response) {
+        response.setHeader("Set-Cookie", REFRESH_TOKEN_COOKIE_NAME + "=; Max-Age=0; Path=" + COOKIE_PATH);
+    }
+
+    private String extractClientIp(HttpServletRequest request) {
+        String xForwardedFor = request.getHeader("X-Forwarded-For");
+        if (xForwardedFor != null && !xForwardedFor.isBlank()) {
+            return xForwardedFor.split(",")[0].trim();
+        }
+        return request.getRemoteAddr();
     }
 }

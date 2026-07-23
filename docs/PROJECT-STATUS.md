@@ -13,14 +13,14 @@ Last updated: 2026-07-20 | By: @ledinhphat (updated by AI)
 ✅ Backend folder structure
 ✅ Phase 0: Project Skeleton, GlobalExceptionHandler, ApiResponse, SecurityConfig, JwtConfig, OpenAPI / Swagger Config
 ✅ Phase 1: Permission CRUD, Category CRUD, Brand CRUD, Color CRUD, Size CRUD, Tag CRUD
-✅ Phase 2: User, Unit Test, Integration Test
+✅ Phase 2: User, Role, UserAddress, Unit Test, Integration Test
+✅ Phase 3: Auth Module (Login/Register/Refresh Token/Logout/Get Me)
 
 ## In Progress
-- Phase 0: Validation, MapStruct, Base Entity
-- Phase 2: UserAddress
+- Phase 0: Validation, MapStruct
 
 ## Next Tasks
-- [P3] Implement Auth Module (Login/Register/Refresh Token)
+- [P4] Implement Catalog Module (Product, ProductVariant, ProductImage)
 
 ## Milestones
 
@@ -54,19 +54,19 @@ Last updated: 2026-07-20 | By: @ledinhphat (updated by AI)
 ### Phase 2 — Identity & Access
 - [x] Role
 - [x] User
-- [ ] UserAddress
+- [x] UserAddress
 - [x] Unit Test
 - [x] Integration Test
 
 
 ### Phase 3 — Authentication
-- [ ] Login
-- [ ] Register
-- [ ] Refresh Token (cơ bản)
-- [ ] Logout
-- [ ] GET /users/me
-- [ ] Unit Test
-- [ ] Integration Test
+- [x] Login
+- [x] Register
+- [x] Refresh Token (cơ bản)
+- [x] Logout
+- [x] GET /users/me
+- [x] Unit Test
+- [x] Integration Test
 
 
 ### Phase 4 — Catalog
@@ -157,3 +157,21 @@ Last updated: 2026-07-20 | By: @ledinhphat (updated by AI)
 - Updated `DATABASE.md` to include `is_active`, `created_at`, `updated_at` for Role.
 - Implemented `Role` CRUD (Entity, Repository, Service, Controller, DTOs) with unidirectional `@ManyToMany` mapping to `Permission`.
 - Wrote and passed comprehensive Unit Tests (`RoleServiceImplTest`) and Integration Tests (`RoleControllerIntegrationTest`) adhering to custom project conventions.
+- Created `feature/useraddress` package for UserAddress CRUD to avoid bloating `feature/user`.
+- Implemented `UserAddress` CRUD (Entity extending `BaseEntity`, Repository, Service, Controller, DTOs).
+- Designed endpoints to map to `/api/v1/users/me/addresses` and retrieve `userId` securely from JWT context.
+- Successfully passed 6 Unit Tests and 5 Integration Tests for UserAddress module.
+- Added `CONTEXT.md` for `UserAddress` module.
+- Implemented `AuthenticationFacade` in the `security` package to decouple JWT parsing from controllers.
+- Updated `UserController` and `UserAddressController` to extract user state via `AuthenticationFacade`.
+- Added `CONTEXT.md` for the `security` package.
+- Implemented Auth Module (Phase 3) including `Login`, `Register`, `RefreshToken`, and `Logout`.
+- Created `RefreshToken` entity and repository.
+- Refactored `CustomUserDetailsService` and `JwtService` to inject `userId` and `scope` into JWT claims.
+- Added `/api/v1/users/me` endpoint to `UserController` using `AuthenticationFacade`.
+- Refactored Auth Module to use HttpOnly Cookie for Refresh Token, enhancing security against XSS.
+- Refactored AuthServiceImpl and AuthController to correctly handle JWT configurations via `JwtProperties`.
+- Replaced outdated `@MockBean` with `@MockitoBean` in Auth integration tests.
+- Replaced `com.fasterxml.jackson` with `tools.jackson` to resolve test DI issues.
+- Updated `API_SPEC.md` and added `CONTEXT.md` for Auth Module.
+- Wrote and passed comprehensive Unit and Integration tests for the refactored Auth Module.

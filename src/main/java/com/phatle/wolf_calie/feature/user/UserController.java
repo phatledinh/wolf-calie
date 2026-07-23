@@ -9,18 +9,20 @@ import jakarta.validation.Valid;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
+
+import com.phatle.wolf_calie.security.AuthenticationFacade;
 
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserController {
 
     private final UserService userService;
+    private final AuthenticationFacade authenticationFacade;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, AuthenticationFacade authenticationFacade) {
         this.userService = userService;
+        this.authenticationFacade = authenticationFacade;
     }
 
     @GetMapping
@@ -34,12 +36,9 @@ public class UserController {
     }
 
     @GetMapping("/me")
-    public ResponseEntity<ApiResponse<UserResponse>> getCurrentUser(@AuthenticationPrincipal Jwt jwt) {
-        if (jwt == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-        String email = jwt.getSubject();
-        return ResponseEntity.ok(ApiResponse.success(userService.getCurrentUser(email)));
+    public ResponseEntity<ApiResponse<UserResponse>> getCurrentUser() {
+        long userId = authenticationFacade.getCurrentUserId();
+        return ResponseEntity.ok(ApiResponse.success(userService.getUserById(userId)));
     }
 
     @PostMapping

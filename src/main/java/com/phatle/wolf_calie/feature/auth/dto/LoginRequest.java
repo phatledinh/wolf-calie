@@ -2,13 +2,13 @@ package com.phatle.wolf_calie.feature.auth.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Data;
 
-@Data
-public class LoginRequest {
-    @NotBlank(message = "Email is required")
-    @Email(message = "Invalid email format")
-    private String email;
-    @NotBlank(message = "Password is required")
-    private String password;
+public record LoginRequest(
+        @NotBlank(message = "Email không được để trống")
+        @Email(message = "Email không đúng định dạng")
+        String email,
+
+        @NotBlank(message = "Mật khẩu không được để trống")
+        String password
+) {
 }

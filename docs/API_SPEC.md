@@ -79,11 +79,11 @@ If a user double-clicks checkout, the second request with the same key returns t
 
 ## 2. Authentication & Identity
 
-### Auth
-- `POST /auth/login` 🔓
+### Auth (JWT & Refresh Token via HttpOnly Cookie)
+- `POST /auth/login` 🔓 (Returns Access Token in JSON, Refresh Token in HttpOnly Cookie)
 - `POST /auth/register` 🔓
-- `POST /auth/refresh` 🔓
-- `POST /auth/logout` 🔒
+- `POST /auth/refresh` 🔓 (Reads Refresh Token from HttpOnly Cookie)
+- `POST /auth/logout` 🔒 (Clears HttpOnly Cookie)
 
 ### Current User
 - `GET /users/me` 🔒

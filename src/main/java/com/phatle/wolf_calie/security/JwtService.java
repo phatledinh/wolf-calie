@@ -23,14 +23,26 @@ public class JwtService {
     public String generateToken(Authentication authentication) {
         Instant now = Instant.now();
 
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+
+        String scope = authentication.getAuthorities().stream()
+                .map(org.springframework.security.core.GrantedAuthority::getAuthority)
+                .reduce((a, b) -> a + " " + b)
+                .orElse("");
+
         JwtClaimsSet claims = JwtClaimsSet.builder()
                 .subject(authentication.getName())
                 .issuedAt(now)
                 .expiresAt(now.plusMillis(jwtProperties.accessTokenExpiration()))
-                .claim("scope", "ROLE_USER") // Thêm role/permission ở đây nếu cần
+                .claim("scope", scope)
+                .claim("userId", userDetails.getId())
                 .build();
 
         JwsHeader header = JwsHeader.with(MacAlgorithm.HS512).build();
         return this.jwtEncoder.encode(JwtEncoderParameters.from(header, claims)).getTokenValue();
+    }
+
+    public String generateRefreshToken() {
+        return java.util.UUID.randomUUID().toString();
     }
 }

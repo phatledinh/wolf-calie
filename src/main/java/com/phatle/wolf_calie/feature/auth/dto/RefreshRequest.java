@@ -1,7 +1,6 @@
 package com.phatle.wolf_calie.feature.auth.dto;
 
-public record LoginResponse(
-        String accessToken,
+public record RefreshRequest(
         String refreshToken
 ) {
 }
